@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hangman by ptnega</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+    <div>
+        <select id="category">
+            <option value="0">Sports</option>
+            <option value="1">Songs</option>
+            <option value="2">Algorithms and Data Structures</option>
+            <option value="3">Countries</option>
+        </select>
+        <button id="play" onclick="initGame()">Play</button>
+    </div>
+    <center>
+        <img id="hangman" src="img/1.png">
+        <p id="word" style="font-size: 2em;"></p>
+        <div id="alphabet">
+
+        </div>
+    </center>
+
+    <script type="text/javascript" src="js/hangman.js"></script>
+</body>
+
+</html>
