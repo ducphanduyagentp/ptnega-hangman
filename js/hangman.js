@@ -46,6 +46,12 @@ function initGame() {
 
 }
 
+function resetGame() {
+	document.getElementById('hangman').src = 'img/0.png';
+	State = 0;
+    document.getElementById('alphabet').innerHTML = '';
+}
+
 function processGame(x) {
 
     var ToRemove = '<button value="' + String(x) + '" onclick="processGame(this.value)">' + String(x) + '</button>\n';
@@ -70,11 +76,9 @@ function processGame(x) {
 
     if (State > 6) {
         alert('You lose!\n' + 'The answer is ' + Ans);
-        document.getElementById('hangman').src = 'img/0.png';
-
-        State = 0;
-        document.getElementById('alphabet').innerHTML = '';
-    }
-    if (tmp == Ans)
+		resetGame();
+    } else if (tmp == Ans) {
         alert('You win!');
+        resetGame();
+    }
 }
