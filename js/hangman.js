@@ -68,8 +68,10 @@ function processGame(x) {
         document.getElementById('word').innerHTML = tmp;
     }
 
-    if (State > 5)
+    if (State > 6) {
         alert('You lose!\n' + 'The answer is ' + Ans);
+        document.getElementById('hangman').src = 'img/0.png';
+    }
     if (tmp == Ans)
         alert('You win!');
 }
