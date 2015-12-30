@@ -24,15 +24,16 @@ function getRandomInt(min, max) {
 
 function initGame() {
 
-    initKeyboard();
-    State = 1;
-
-    var Category = document.getElementById('category');
+	var Category = document.getElementById('category');
     var Opt = Category.options[Category.selectedIndex].value;
-
     var idx = getRandomInt(0, 4);
-    Opt = Number(Opt);
 
+    initKeyboard();
+    State = 2;
+
+    document.getElementById('hangman').src = 'img/' + State + '.png';
+    
+    Opt = Number(Opt);
     Ans = WordList[Opt][idx];
     tmp = Ans;
 
