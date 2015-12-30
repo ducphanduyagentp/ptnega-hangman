@@ -71,6 +71,9 @@ function processGame(x) {
     if (State > 6) {
         alert('You lose!\n' + 'The answer is ' + Ans);
         document.getElementById('hangman').src = 'img/0.png';
+
+        State = 0;
+        document.getElementById('alphabet').innerHTML = '';
     }
     if (tmp == Ans)
         alert('You win!');
