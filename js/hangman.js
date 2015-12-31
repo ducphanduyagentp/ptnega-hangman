@@ -35,13 +35,22 @@ function initGame() {
     
     Opt = Number(Opt);
     Ans = WordList[Opt][idx];
+    //Ans.replace(/" "/g, "  ");
     tmp = Ans;
 
-    for (var i = 0; i < tmp.length; ++i) {
+    var ntmp = 2 * tmp.length;
+
+    for (var i = 0; i < ntmp; i += 2) {
         if (Vowel.indexOf(tmp[i]) == -1) {
             tmp = tmp.substr(0, i) + '_' + tmp.substr(i + 1);
         }
+
+        tmp = tmp.substr(0, i + 1) + " " + tmp.substr(i + 1);
+        Ans = Ans.substr(0, i + 1) + " " + Ans.substr(i + 1);
+        
     }
+
+    console.log(tmp);
     document.getElementById('word').innerHTML = tmp;
 
 }
@@ -75,10 +84,15 @@ function processGame(x) {
     }
 
     if (State > 6) {
-        alert('You lose!\n' + 'The answer is ' + Ans);
-		resetGame();
+        //alert('You lose!\n' + 'The answer is ' + Ans);
+		
+        document.getElementById('word').innerHTML = Ans;
+        resetGame();
     } else if (tmp == Ans) {
-        alert('You win!');
+        //  alert('You win!');
+        document.getElementById('word').innerHTML = Ans;
         resetGame();
     }
+
+
 }
