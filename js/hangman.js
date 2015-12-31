@@ -4,10 +4,11 @@ var WordList = [
     ['DIJKSTRA', 'TREAP', 'BINARY INDEXED TREE', 'INTERVAL TREE', 'LINKED LIST'],
     ['VIETNAM', 'SINGAPORE', 'GERMANY', 'UNITED STATES OF AMERICA', 'ENGLAND']
 ];
-var Vowel = ['A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u', ' '];
+var Vowel = ['A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u', ' ', '&', 'n', 'b', 's', 'p' , ';'];
 var State;
 var tmp;
 var Ans;
+var LastPlayed = [-1, -1];
 
 function initKeyboard() {
     document.getElementById('alphabet').innerHTML = '';
@@ -26,7 +27,13 @@ function initGame() {
 
 	var Category = document.getElementById('category');
     var Opt = Category.options[Category.selectedIndex].value;
-    var idx = getRandomInt(0, 4);
+    var idx = getRandomInt(0, WordList[Opt].length - 1);
+    if (Opt == LastPlayed[0]) {
+        while(idx == LastPlayed[1])
+            idx = getRandomInt(0, WordList[Opt].length - 1);
+    }
+    LastPlayed[0] = Opt;
+    LastPlayed[1] = idx;
 
     initKeyboard();
     State = 2;
@@ -35,28 +42,19 @@ function initGame() {
     
     Opt = Number(Opt);
     Ans = WordList[Opt][idx];
-    //Ans.replace(/" "/g, "  ");
+    Ans = Ans.split('').join('&nbsp;');
     tmp = Ans;
 
-    var ntmp = 2 * tmp.length;
-
-    for (var i = 0; i < ntmp; i += 2) {
-        if (Vowel.indexOf(tmp[i]) == -1) {
-            tmp = tmp.substr(0, i) + '_' + tmp.substr(i + 1);
+    for (var i = 0; i < Ans.length; ++i) {
+        if (Vowel.indexOf(Ans.charAt(i)) == -1) {
+            tmp = tmp.replace(String(Ans.charAt(i)), '_');
         }
-
-        tmp = tmp.substr(0, i + 1) + " " + tmp.substr(i + 1);
-        Ans = Ans.substr(0, i + 1) + " " + Ans.substr(i + 1);
-        
     }
 
-    console.log(tmp);
     document.getElementById('word').innerHTML = tmp;
-
 }
 
 function resetGame() {
-	document.getElementById('hangman').src = 'img/0.png';
 	State = 0;
     document.getElementById('alphabet').innerHTML = '';
 }
@@ -84,13 +82,15 @@ function processGame(x) {
     }
 
     if (State > 6) {
-        //alert('You lose!\n' + 'The answer is ' + Ans);
 		
         document.getElementById('word').innerHTML = Ans;
+        document.getElementById('hangman').src = 'img/lose.png';
         resetGame();
+
     } else if (tmp == Ans) {
-        //  alert('You win!');
+
         document.getElementById('word').innerHTML = Ans;
+        document.getElementById('hangman').src = 'img/win.png';
         resetGame();
     }
 
