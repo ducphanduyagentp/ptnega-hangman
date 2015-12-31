@@ -85,12 +85,16 @@ function processGame(x) {
 		
         document.getElementById('word').innerHTML = Ans;
         document.getElementById('hangman').src = 'img/lose.png';
+        var audio = new Audio('sound/lose.mp3');
+        audio.play();
         resetGame();
 
     } else if (tmp == Ans) {
 
         document.getElementById('word').innerHTML = Ans;
         document.getElementById('hangman').src = 'img/win.png';
+        var audio = new Audio('sound/win.mp3');
+        audio.play();
         resetGame();
     }
 
